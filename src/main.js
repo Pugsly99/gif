@@ -7,15 +7,16 @@ import GiphyService from './services/giphy-service';
 
 function clearFields() {
   $('#giphy').val("");
+  $('#trending').val("");
   $('.show-errors').text("");
   $('.show-gif').text("");
 }
 
-function displayWeatherDescription(url) {
+function displaySearch(url) {
   $('.show-gif').html(`<img src='${url}'>`);
 }
 
-function displayGif(response) {
+function displayTrending(response) {
   const url = response.data[0].images.downsized.url
   $('.show-gif').html(`<img src='${url}'>`);
 }
@@ -34,7 +35,7 @@ $(document).ready(function() {
           throw Error(`Giphy API error: ${giphyResponse.message}`);
         }
         const gihpyImage = giphyResponse.data[0].images.original.url;
-        displayWeatherDescription(gihpyImage);
+        displaySearch(gihpyImage);
         return GiphyService.getGif(weatherDescription);
       })
       .then(function(giphyResponse) {
@@ -47,4 +48,19 @@ $(document).ready(function() {
         displayErrors(error.message)
       })
   });
+  $('#trending').click(function() {
+    let imageLimit = parseInt($('#limit').val());
+    clearFields();
+    GiphyService.getTrending(imageLimit)
+      .then(function(giphyResponse) {
+        if (giphyResponse instanceof Error) {
+          throw Error(`Giphy API error: ${giphyResponse.message}`);
+        }
+        for (let i = 0; i < imageLimit - 1 ; i++) {
+
+        }
+        const gihpyImage = giphyResponse.data[0].images[i].original.url;
+        displayTrending(gihpyImage);
+        return GiphyService.getGif(weatherDescription);
+      })
 });
