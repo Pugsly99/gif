@@ -1,13 +1,21 @@
 <html lang="en-US">
 <head>
-  <title>Weather</title>
+  <title>GIF Finder</title>
 </head>
 <body>
   <div class="container">
-    <h1>Get a Gif for a any term!</h1>
+    <h1>Get a Gif for any term!</h1>
     <label for="giphy">Enter a Search Term:</label>
     <input id="giphy" type="text">
     <button class="btn-success" id="giphy-search">Get a gif</button>
+    <div class="weather-description"></div>
+    <div class="show-gif"></div>
+    <div class="show-errors"></div>
+
+    <h1>Get a trending gif</h1>
+    <label for="limit">how many gifs would you like to see:</label>
+    <input id="limit" type="number" min="1" max="30">
+    <button class="btn-success" id="trending">Get a gif</button>
     <div class="weather-description"></div>
     <div class="show-gif"></div>
     <div class="show-errors"></div>
